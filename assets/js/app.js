@@ -46,13 +46,16 @@ const saveList = (li, itemLabel, targetElement) => {
 }
 
 // Complete List Item
-const completeItem = (targetElement) => {
+const completeItem = (targetElement, li) => {
+    const editBtn = li.querySelector('.edit');
     if (targetElement.checked) {
         targetElement.setAttribute("checked", "");
         targetElement.parentNode.classList.add('line-through');
+        editBtn.disabled = true;
     } else {
         targetElement.parentNode.classList.remove('line-through');
         targetElement.removeAttribute("checked");
+        editBtn.disabled = false;
     }
 }
 
@@ -137,7 +140,7 @@ list.addEventListener('click', (e) => {
         } else if (saveBtn) {
             saveList(li, itemLabel, targetElement);
         } else if (check) {
-            completeItem(targetElement);
+            completeItem(targetElement, li);
         }
     }
 });
